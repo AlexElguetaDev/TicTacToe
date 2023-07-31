@@ -1,6 +1,6 @@
 export const TURNS = {
-  X: '🟢',
-  O: '🟠',
+  X: 'X',
+  O: 'O',
 }
 
 export const COMBOS = [
