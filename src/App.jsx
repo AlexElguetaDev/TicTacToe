@@ -49,7 +49,11 @@ function App() {
     // comprobamos si hay ganador
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
-      confetti()
+      confetti({
+        particleCount: 200,
+        spread: 150,
+        origin: { y: 0.6 }
+      })
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
       setWinner(false)
