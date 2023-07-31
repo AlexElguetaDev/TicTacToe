@@ -1,8 +1,7 @@
 import { useState } from "react"
-import confetti from 'canvas-confetti'
 import { Square } from "./components/Square"
-import { TURNS, COLORS } from "./constants"
-import { checkWinner, checkEndGame } from "./logic/board"
+import { TURNS } from "./constants"
+import { checkWinner, checkEndGame, celebrity } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 import { Board } from "./components/Board"
 import { saveGameToStorage, resetGameStorage } from "./logic/storage"
@@ -49,20 +48,7 @@ function App() {
     // comprobamos si hay ganador
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
-      confetti({
-        particleCount: 50,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: COLORS
-      });
-      confetti({
-        particleCount: 50,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: COLORS
-      });
+      celebrity()
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
       setWinner(false)
