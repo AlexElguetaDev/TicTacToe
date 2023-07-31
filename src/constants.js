@@ -16,3 +16,5 @@ export const COMBOS = [
   [0, 4, 8],
   [2, 4, 6],
 ]
+
+export const COLORS = ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a']

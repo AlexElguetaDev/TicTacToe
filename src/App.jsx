@@ -1,7 +1,7 @@
 import { useState } from "react"
 import confetti from 'canvas-confetti'
 import { Square } from "./components/Square"
-import { TURNS } from "./constants"
+import { TURNS, COLORS } from "./constants"
 import { checkWinner, checkEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 import { Board } from "./components/Board"
@@ -50,10 +50,19 @@ function App() {
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       confetti({
-        particleCount: 200,
-        spread: 150,
-        origin: { y: 0.6 }
-      })
+        particleCount: 50,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: COLORS
+      });
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: COLORS
+      });
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
       setWinner(false)
