@@ -5,31 +5,48 @@ import { TURNS } from "./constants"
 import { checkWinner, checkEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 import { Board } from "./components/Board"
+import { saveGameToStorage, resetGameStorage } from "./logic/storage"
 
 
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null))
-  console.log(board)
+  const [board, setBoard] = useState(() => {
+    const savedBoard = window.localStorage.getItem('board')
+    return savedBoard ? JSON.parse(savedBoard) : (Array(9).fill(null))
+  })
 
-  const [turn, setTurn] = useState(TURNS.X)
+  const [turn, setTurn] = useState(() => {
+    const savedTurn = window.localStorage.getItem('turn')
+    return savedTurn ? savedTurn : TURNS.X
+  })
+
   const [winner, setWinner] = useState(null)
 
   const resetGame = () => {
     setBoard(Array(9).fill(null))
     setWinner(null)
+    setTurn(TURNS.X)
+    resetGameStorage()
   }
 
   const updateBoard = (index) => {
+    //si ya tenemos algo o un ganador, no hacemos nada
     if (board[index] || winner) return
+
+    // actualizamos el tablero
     const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard)
     console.log(newBoard)
 
+    // actualizamos el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
 
+    // guardar partida
+    saveGameToStorage({ board: newBoard, turn: newTurn })
+
+    // comprobamos si hay ganador
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       confetti()
