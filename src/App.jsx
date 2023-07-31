@@ -70,7 +70,7 @@ function App() {
       <WinnerModal winner={winner} resetGame={resetGame} />
 
       <footer>
-        <button onClick={resetGame}>🎮 Reiniciar</button>
+        <button onClick={resetGame}>Reiniciar</button>
       </footer>
     </main>
   )
